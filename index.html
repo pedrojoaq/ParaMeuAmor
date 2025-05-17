@@ -1,32 +1,74 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Carta Para Meu Amor</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Carta Para Meu Amor</title>
 </head>
 <body>
-    <audio autoplay>
-    <source src="song.mp3" type="audio/mpeg">
+  <div class="audio-top">
+    <audio id="meuAudio" controls>
+      <source src="song.mp3" type="audio/mpeg">
+      Seu navegador não suporta áudio.
     </audio>
+  </div>
 
-<div class="centralizada">
-  <img src="coracao.svg" class="imgs top-left">
-  <img src="estrela.svg" class="imgs top-right">
-  <img src="estrelaG.svg" class="imgs bottom-left">
-  <img src="flor.svg" class="imgs bottom-right">
+  <div class="centralizada">
+    <img src="coracao.svg" class="imgs top-left">
+    <img src="estrela.svg" class="imgs top-right">
+    <img src="estrelaG.svg" class="imgs bottom-left">
+    <img src="flor.svg" class="imgs bottom-right">
 
-  <div class="conteudo">
-    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
-        Debitis, dignissimos? Repellat, harum aperiam id, 
-        odio iste magni nulla quibusdam dolore saepe laborum 
-        dicta eos a natus blanditiis vero deleniti minus?
-    </p>
-    <div class="botao-wrapper">
-        <a href="#" class="botao-fofo">Clique Aqui!</a>
+    <div id="caixaTexto">
+      <p id="texto"></p>
+      <div class="botao-wrapper" id="botaoContainer">
+          <a class="botao-fofo" onclick="mostrarProximo()">Continua...</a>
+      </div>
     </div>
   </div>
-</div>
+
+  <script>
+    const textos = [
+    "Amor, eu gostaria de pedir desculpa pelo fiasco que foi os seus outros aniversário, eu reconheço que fui um péssimo amigo naquela epoca, mas hoje, como seu momo, quero mi redimir.",
+    "Como hoje é o seu dia, quis preparar essa surprezinha pa você qui deu muuuuuuuuito trabaio puque tem muito que eu não programa (tive ajudinhas do all knowing).",
+    "Eu te amo muito amor e queria agradecer por tudo que você faz e passa a gente dar certo e me fazer filiz. Eu queria de poder fazer mais por você, por isso eu gosto di ti dar presentinhos, tipos os as cartinhas e os boosters qui eu ti dei.",
+    "Eu quero melhorar como pessoa para que o nosso futuro e sonhos que estão distantes e incertos tenha pelo menos um pouquinho mais de 'concreticidade?'.",
+    "Porque sendo saudável ou não eu faço as coisas pela gente, porque eu amo a gente e quero ser muito feliz com você, para o resto da minha vida.",
+    "E o principal...",
+    "FELIZ ANIVERSÁRIO AMOR!!!!! Que venham muitos mais anos comigo do seu ladinho, pra todo o sempre!"
+  ];
+
+    let indice = 0;
+    document.getElementById("texto").innerText = textos[indice];
+
+    function mostrarProximo() {
+      indice++;
+      const textoEl = document.getElementById("texto");
+
+      if (indice < textos.length - 1) {
+        document.getElementById("texto").innerText = textos[indice];
+      } else {
+        textoEl.innerText = textos[indice];
+        document.getElementById("botaoContainer").remove();
+        iniciarConfete();
+      }
+  }
+
+    function criarConfete() {
+      const confete = document.createElement('div');
+      confete.classList.add('confete');
+      const cores = ['#ff4081', '#40c4ff', '#69f0ae', '#ffd740', '#7c4dff'];
+      confete.style.backgroundColor = cores[Math.floor(Math.random() * cores.length)];
+      confete.style.left = Math.random() * 100 + 'vw';
+      confete.style.animationDuration = (Math.random() * 3 + 2) + 's';
+      document.body.appendChild(confete);
+      setTimeout(() => confete.remove(), 5000);
+    }
+
+    function iniciarConfete() {
+      const intervalo = setInterval(criarConfete, 20);
+    }
+  </script>
 </body>
 </html>
